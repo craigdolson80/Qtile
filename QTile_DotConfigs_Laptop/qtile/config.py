@@ -2,8 +2,8 @@ import os
 import re
 import socket
 import subprocess
-from libqtile import bar, layout, widget, extension, hook
-from libqtile.config import Click, Drag, Group, Key, Match, Screen, Rule
+from libqtile import bar, layout, widget, extension, hook, qtile
+from libqtile.config import Click, Drag, Group, Key, Match, Screen, Rule, KeyChord
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 from libqtile.widget import Spacer
@@ -14,12 +14,13 @@ mod3 = "alt"
 terminal = "alacritty"
 mybrowser = "firefox"
 myeditor = "geany"
+mymenu = "rofi -show run"
 
 ##Autostart Script for misc applications##
 @hook.subscribe.startup_once
 def start_once():
 	home = os.path.expanduser('~')
-	subprocess.call([home + '/.config/qtile/autostart.sh'])
+	subprocess.call([home + '/.config/qtile/scripts/autostart.sh'])
 
 #CUSTOM COLORS - Catpuccin / Cappucino#
 def init_colors():
@@ -61,7 +62,7 @@ keys = [
     Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
     Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
     Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
-    Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
+    Key([mod], "o", lazy.layout.next(), desc="Move window focus to other window"),
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
     Key([mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"),
@@ -91,13 +92,14 @@ keys = [
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
+    Key([mod], "space", lazy.spawn(mymenu), desc="Run Rofi"),
        
    #Custom DMENU Launcher
    Key([mod, "shift"], "Return", lazy.run_extension(extension.DmenuRun(
         dmenu_prompt="$",
         background="#24273a",
         dmenu_font="Ubuntu Bold-10",
-        ))),
+      ))),
 ]
 
 #groups = [Group(i) for i in "123456789"]
@@ -191,11 +193,13 @@ layouts = [
 
 widget_defaults = dict(
     font="Ubuntu Bold",
-    fontsize=11,
+    fontsize=13,
     padding=2,
     background=colors[23]
-)
+    )
 extension_defaults = widget_defaults.copy()
+
+##Mouse Callbacks##
 
 screens = [
     Screen(
@@ -206,9 +210,9 @@ screens = [
                            padding = 6,
                            ),
                 widget.Image(
-                             filename = "~/.config/qtile/icons/python.png",
+                             filename = "~/.config/qtile/icons/arch.png",
+                             mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(mymenu)},
                              scale = "False"
-                             #mouse_callbacks = {"Button1": lambda: qtile.cmd_spawn(terminal)}
                              ),
                 widget.Sep(
                            linewidth = 0,
@@ -234,7 +238,8 @@ screens = [
                              ),
                 widget.CPU(
                            background = colors[4],
-						   foreground = colors[25]
+						   foreground = colors[25],
+						   mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e gtop')},
                            ),
                 widget.Sep(
                            linewidth = 0,
@@ -246,7 +251,7 @@ screens = [
 						       foreground = colors[25]
                                ),             
                 widget.Memory(
-                              measure_mem='M',
+                              measure_mem='G',
                               background = colors[13],
 						      foreground = colors[25]
                               ),
