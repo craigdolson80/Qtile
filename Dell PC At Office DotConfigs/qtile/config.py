@@ -255,12 +255,17 @@ screens = [
 						   mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e gtop')},
 						   padding = 5
                            ),
-               
+                widget.TextBox(
+                               text = 'MEM:',
+                               background = colors[12],
+						       foreground = colors[25],
+						       padding = 3
+                               ),
                 widget.Memory(
                               measure_mem='G',
                               background = colors[12],
 						      foreground = colors[25],
-						      padding = 5
+						      padding = 4
                               ),
                                        
                 widget.Net(
