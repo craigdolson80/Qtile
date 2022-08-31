@@ -102,23 +102,58 @@ keys = [
       ))),
 ]
 
-#groups = [Group(i) for i in "123456789"]
+##This function auto changes to the group when an application is opened, if matched to a group##
 
-groups = []
+@hook.subscribe.client_managed
+def show_window(window):
+     window.group.cmd_toscreen()
 
-group_names = ["1", "2", "3", "4", "5", "6", "7", "8",]
+groups = [
+    Group("1", label="term",
+        matches=[
+            Match(wm_class=["Alacritty"]),
+        ]
+          ),
+               
+    Group("2", label="www",
+        matches=[
+            Match(wm_class=["firefox"]),
+        ]
+          ),
 
-group_labels = ["term", "www", "vm", "util", "dev", "file", "chat", "misc",]
+    Group("3", label="vm",
+        matches=[
+            Match(wm_class=["Virt-manager"]),
+        ]
+          ),
 
-group_layouts = ["MonadTall", "MonadTall", "MonadTall", "MonadTall", "MonadTall", "MonadTall", "MonadTall", "MonadTall",]
+    Group("4", label="util",
+        matches=[
+            Match(wm_class=["Yubico Authenticator","Galculator"]),
+        ]
+          ),
 
-for i in range(len(group_names)):
-	groups.append(
-		Group(
-			name=group_names[i],
-			layout=group_layouts[i].lower(),
-			label=group_labels[i],
-		))
+    Group("5", label="dev",
+        matches=[
+            Match(wm_class=["Geany"]),
+        ]
+          ),
+
+    Group("6", label="file",
+        matches=[
+            Match(wm_class=["pcmanfm", "Thunar"]),
+        ]
+          ),
+
+    Group("7", label="chat",
+        matches=[
+            Match(wm_class=["irssi"]),
+        ]
+          ),
+
+    Group("8", label="misc",
+          ),
+]
 
 for i in groups:
     keys.extend(
@@ -236,7 +271,7 @@ screens = [
                     },
                     name_transform=lambda name: name.upper(),
                              ),
-
+                
                  widget.CheckUpdates(
                        update_interval = 1800,
                        distro = "Arch_checkupdates",
