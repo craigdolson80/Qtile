@@ -50,6 +50,7 @@ def init_colors():
 			["#24273a", "#24273a"], #color 23 Base
 			["#1e2030", "#1e2030"], #color 24 Mantle
 			["#181926", "#181926"], #color 25 Crust
+			["#FFFFFF", "#FFFFFF"], #color 26 White
             ]
 
 colors = init_colors()			
@@ -95,7 +96,7 @@ keys = [
     Key([mod], "space", lazy.spawn(mymenu), desc="Run Rofi"),
        
    #Custom DMENU Launcher
-   Key([mod, "shift"], "Return", lazy.run_extension(extension.DmenuRun(
+   Key([mod, "control"], "Return", lazy.run_extension(extension.DmenuRun(
         dmenu_prompt="$",
         background="#24273a",
         dmenu_font="Ubuntu Bold-10",
@@ -261,8 +262,10 @@ screens = [
                                 padding_y = 5,
                                 padding_x = 2
                                 ),
-                widget.CurrentLayoutIcon(),
-                widget.CurrentLayout(),
+                widget.Sep(
+                           linewidth = 2,
+                           padding = 12,
+                           ),                 
                 widget.Prompt(),
                 widget.WindowName(),
                 widget.Chord(
@@ -271,8 +274,15 @@ screens = [
                     },
                     name_transform=lambda name: name.upper(),
                              ),
-                
-                 widget.CheckUpdates(
+              
+				widget.CurrentLayout(),
+				widget.CurrentLayoutIcon(),
+				widget.Sep(
+                           linewidth = 0,
+                           padding = 6,
+                           ), 
+                widget.Systray(),                           
+                widget.CheckUpdates(
                        update_interval = 1800,
                        distro = "Arch_checkupdates",
                        display_format = "Updates: {updates} ",
@@ -323,7 +333,7 @@ screens = [
 						         foreground = colors[25],
 						         padding = 5,
 						         ),
-				widget.Systray(),		         
+
 				  		         
             ],
             24,
