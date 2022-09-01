@@ -118,7 +118,7 @@ groups = [
                
     Group("2", label="www",
         matches=[
-            Match(wm_class=["firefox"]),
+            Match(wm_class=["firefox","Google-chrome"]),
         ]
           ),
 
@@ -246,7 +246,7 @@ screens = [
                            padding = 6,
                            ),
                 widget.Image(
-                             filename = "~/.config/qtile/icons/arch.png",
+                             filename = "~/.config/qtile/icons/green_python.png",
                              mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(mymenu)},
                              scale = "False"
                             ),
@@ -266,7 +266,6 @@ screens = [
                            linewidth = 2,
                            padding = 12,
                            ),                 
-                widget.Prompt(),
                 widget.WindowName(),
                 widget.Chord(
                     chords_colors={
@@ -291,45 +290,62 @@ screens = [
                        colour_no_updates = colors[25],
                        mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e sudo pacman -Syu')},
                        padding = 5,
-                       background = colors[12]
+                       background = colors[8]
                        ),
-
+                widget.Image(
+                             filename = "~/.config/qtile/icons/green_aarow.png",
+                             scale = "False"
+                            ),
                 widget.CPU(
-                           background = colors[9],
+                           background = colors[8],
 						   foreground = colors[25],
 						   mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e gtop')},
 						   padding = 5
                            ),
+                widget.Image(
+                             filename = "~/.config/qtile/icons/leading_green_aarow.png",
+                             scale = "False"
+                            ),
                 widget.TextBox(
                                text = 'MEM:',
-                               background = colors[12],
+                               background = colors[3],
 						       foreground = colors[25],
 						       padding = 3
                                ),
+               
                 widget.Memory(
                               measure_mem='G',
-                              background = colors[12],
+                              background = colors[3],
 						      foreground = colors[25],
-						      padding = 4
+						      padding = 5
                               ),
-                                       
+                widget.Image(
+                             filename = "~/.config/qtile/icons/leading_mauve_aarow.png",
+                             scale = "False"
+                            ),                       
                 widget.Net(
 						   interface = "enp0s31f6",	
 						   prefix = "M",
-						   background = colors[9],
+						   background = colors[8],
 						   foreground = colors[25],
 						   padding = 5
 						   ),
-                      
+                widget.Image(
+                             filename = "~/.config/qtile/icons/leading_green_aarow.png",
+                             scale = "False"
+                            ),      
                 widget.Clock(
                              format="%m-%d-%Y %H:%M",
-                             background = colors[12],
+                             background = colors[3],
 						     foreground = colors[25],
 						     padding = 5,
                              ),
-                 
+                widget.Image(
+                             filename = "~/.config/qtile/icons/leading_mauve_aarow.png",
+                             scale = "False"
+                            ),      
                 widget.QuickExit(
-                                 background = colors[9],
+                                 background = colors[8],
 						         foreground = colors[25],
 						         padding = 5,
 						         ),
