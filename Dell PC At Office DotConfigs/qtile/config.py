@@ -290,10 +290,10 @@ screens = [
                        colour_no_updates = colors[25],
                        mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e sudo pacman -Syu')},
                        padding = 5,
-                       background = colors[8]
+                       background = colors[0]
                        ),
                 widget.Image(
-                             filename = "~/.config/qtile/icons/green_aarow.png",
+                             filename = "~/.config/qtile/colors/theme_icons_catpuccin_macchiato/green_aarow.png",
                              scale = "False"
                             ),
                 widget.CPU(
@@ -303,7 +303,7 @@ screens = [
 						   padding = 5
                            ),
                 widget.Image(
-                             filename = "~/.config/qtile/icons/leading_green_aarow.png",
+                             filename = "~/.config/qtile/colors/theme_icons_catpuccin_macchiato/leading_green_aarow.png",
                              scale = "False"
                             ),
                 widget.TextBox(
@@ -320,7 +320,7 @@ screens = [
 						      padding = 5
                               ),
                 widget.Image(
-                             filename = "~/.config/qtile/icons/leading_mauve_aarow.png",
+                             filename = "~/.config/qtile/colors/theme_icons_catpuccin_macchiato/leading_mauve_aarow.png",
                              scale = "False"
                             ),                       
                 widget.Net(
@@ -331,7 +331,7 @@ screens = [
 						   padding = 5
 						   ),
                 widget.Image(
-                             filename = "~/.config/qtile/icons/leading_green_aarow.png",
+                             filename = "~/.config/qtile/colors/theme_icons_catpuccin_macchiato/leading_green_aarow.png",
                              scale = "False"
                             ),      
                 widget.Clock(
@@ -341,7 +341,7 @@ screens = [
 						     padding = 5,
                              ),
                 widget.Image(
-                             filename = "~/.config/qtile/icons/leading_mauve_aarow.png",
+                             filename = "~/.config/qtile/colors/theme_icons_catpuccin_macchiato/leading_mauve_aarow.png",
                              scale = "False"
                             ),      
                 widget.QuickExit(
