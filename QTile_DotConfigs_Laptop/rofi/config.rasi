@@ -2,7 +2,7 @@
 
 * {
     font: "Jetbrains Mono 12";
-    foreground: #91d7e3;
+    foreground: #f8f8f2;
     background-color: #282a36;
     active-background: #6272a4;
     urgent-background: #ff5555;
@@ -124,28 +124,4 @@
 element-text, element-icon {
     background-color: inherit;
     text-color: inherit;
-}
-
-configuration {
-    font: "Envy Code R 10";
-    line-margin: 10;
-
-    display-ssh:    "";
-    display-run:    "";
-    display-drun:   "";
-    display-window: "";
-    display-combi:  "";
-    show-icons:     true;
-}
-
-
-@theme "~/.config/rofi/nord.rasi"
-
-listview {
-	lines: 6;
-	columns: 2;
-}
-
-window {
-	width: 30%;
 }
