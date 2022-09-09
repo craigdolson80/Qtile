@@ -281,7 +281,7 @@ screens = [
                                background = colors[8],
 						       foreground = colors[12],
 						       fontsize = 14,
-						       padding = 3
+						       padding = 6
                                ),                                      
                 widget.CheckUpdates(
                        update_interval = 1800,
@@ -309,7 +309,7 @@ screens = [
                            background = colors[9],
 						   foreground = colors[12],
 						   mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e gtop')},
-						   padding = 4
+						   padding = 6
                            ),
                 widget.Image(
                              filename = "~/.config/qtile/colors/dracula/leading_purple.png",
@@ -327,7 +327,7 @@ screens = [
                               measure_mem='G',
                               background = colors[8],
 						      foreground = colors[12],
-						      padding = 4
+						      padding = 6
                               ),
                 widget.Image(
                              filename = "~/.config/qtile/colors/dracula/leading_pink.png",
@@ -338,14 +338,14 @@ screens = [
                                background = colors[9],
 						       foreground = colors[12],
 						       fontsize = 14,
-						       padding = 4
+						       padding = 3
                                ),
                 widget.Net(
 						   #interface = "enp0s31f6",	
 						   prefix = "M",
 						   background = colors[9],
 						   foreground = colors[12],
-						   padding = 4
+						   padding = 6
 						   ),
                 widget.Image(
                              filename = "~/.config/qtile/colors/dracula/leading_purple.png",
@@ -356,13 +356,13 @@ screens = [
                                background = colors[8],
 						       foreground = colors[12],
 						       fontsize = 14,
-						       padding = 4
+						       padding = 3
                                ),
                 widget.Clock(
                              format="%m-%d-%Y %H:%M",
                              background = colors[8],
 						     foreground = colors[12],
-						     padding = 4
+						     padding = 6
                              ),
                 widget.Image(
                              filename = "~/.config/qtile/colors/dracula/leading_pink.png",
@@ -373,12 +373,12 @@ screens = [
                                background = colors[9],
 						       foreground = colors[12],
 						       fontsize = 14,
-						       padding = 4
+						       padding = 3
                                ),
                 widget.QuickExit(
                                  background = colors[9],
 						         foreground = colors[12],
-						         padding = 4,
+						         padding = 6,
 						         default_text = ()
 						         ),
 				widget.Image(
