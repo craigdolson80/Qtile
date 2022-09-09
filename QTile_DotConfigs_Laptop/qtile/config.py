@@ -176,30 +176,30 @@ for i in groups:
 
 layouts = [
      layout.MonadTall(
-                     border_focus = colors[12],
+                     border_focus = colors[9],
                      border_normal = colors[0],
-                     border_width = 2,
+                     border_width = 3,
                      margin = 15
                      ),
      layout.Columns(
-                    border_focus = colors[12],
+                    border_focus = colors[9],
                     border_normal = colors[0],
-                    border_width = 2,
+                    border_width = 3,
                     margin = 15
                     ),
      layout.Max(),
     # Try more layouts by unleashing below layouts.
      layout.Stack(
-                  border_focus = colors[12],
+                  border_focus = colors[9],
                   border_normal = colors[0],
-                  border_width = 2,
+                  border_width = 3,
                   margin = 15,
                   num_stacks=2
                   ),
 	 layout.Bsp(
-	            border_focus = colors[12],
+	            border_focus = colors[9],
                 border_normal = colors[0],
-                border_width = 2,
+                border_width = 3,
                 margin = 15
 	            ),
     # layout.Matrix(),
