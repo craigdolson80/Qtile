@@ -2,8 +2,8 @@ import os
 import re
 import socket
 import subprocess
-from libqtile import bar, layout, widget, extension, hook
-from libqtile.config import Click, Drag, Group, Key, Match, Screen, Rule
+from libqtile import bar, layout, widget, extension, hook, qtile
+from libqtile.config import Click, Drag, Group, Key, Match, Screen, Rule, KeyChord
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 from libqtile.widget import Spacer
@@ -14,12 +14,13 @@ mod3 = "alt"
 terminal = "alacritty"
 mybrowser = "firefox"
 myeditor = "geany"
+mymenu = "rofi -show run"
 
 ##Autostart Script for misc applications##
 @hook.subscribe.startup_once
 def start_once():
 	home = os.path.expanduser('~')
-	subprocess.call([home + '/.config/qtile/autostart.sh'])
+	subprocess.call([home + '/.config/qtile/scripts/autostart.sh'])
 
 #CUSTOM COLORS - Catpuccin / Cappucino#
 def init_colors():
@@ -49,6 +50,7 @@ def init_colors():
 			["#24273a", "#24273a"], #color 23 Base
 			["#1e2030", "#1e2030"], #color 24 Mantle
 			["#181926", "#181926"], #color 25 Crust
+			["#FFFFFF", "#FFFFFF"], #color 26 White
             ]
 
 colors = init_colors()			
@@ -61,7 +63,7 @@ keys = [
     Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
     Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
     Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
-    Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
+    Key([mod], "o", lazy.layout.next(), desc="Move window focus to other window"),
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
     Key([mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"),
@@ -91,32 +93,68 @@ keys = [
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
+    Key([mod], "space", lazy.spawn(mymenu), desc="Run Rofi"),
        
    #Custom DMENU Launcher
-   Key([mod, "shift"], "Return", lazy.run_extension(extension.DmenuRun(
+   Key([mod, "control"], "Return", lazy.run_extension(extension.DmenuRun(
         dmenu_prompt="$",
         background="#24273a",
         dmenu_font="Ubuntu Bold-10",
-        ))),
+      ))),
 ]
 
-#groups = [Group(i) for i in "123456789"]
+##This function auto changes to the group when an application is opened, if matched to a group##
 
-groups = []
+@hook.subscribe.client_managed
+def show_window(window):
+     window.group.cmd_toscreen()
 
-group_names = ["1", "2", "3", "4", "5", "6", "7", "8",]
+groups = [
+    Group("1", label="term",
+        matches=[
+            Match(wm_class=["Alacritty"]),
+        ]
+          ),
+               
+    Group("2", label="www",
+        matches=[
+            Match(wm_class=["firefox"]),
+        ]
+          ),
 
-group_labels = ["term", "www", "vm", "util", "dev", "file", "chat", "misc",]
+    Group("3", label="vm",
+        matches=[
+            Match(wm_class=["Virt-manager"]),
+        ]
+          ),
 
-group_layouts = ["MonadTall", "MonadTall", "MonadTall", "MonadTall", "MonadTall", "MonadTall", "MonadTall", "MonadTall",]
+    Group("4", label="util",
+        matches=[
+            Match(wm_class=["Yubico Authenticator","Galculator"]),
+        ]
+          ),
 
-for i in range(len(group_names)):
-	groups.append(
-		Group(
-			name=group_names[i],
-			layout=group_layouts[i].lower(),
-			label=group_labels[i],
-		))
+    Group("5", label="dev",
+        matches=[
+            Match(wm_class=["Geany"]),
+        ]
+          ),
+
+    Group("6", label="file",
+        matches=[
+            Match(wm_class=["pcmanfm", "Thunar"]),
+        ]
+          ),
+
+    Group("7", label="chat",
+        matches=[
+            Match(wm_class=["irssi"]),
+        ]
+          ),
+
+    Group("8", label="misc",
+          ),
+]
 
 for i in groups:
     keys.extend(
@@ -191,11 +229,13 @@ layouts = [
 
 widget_defaults = dict(
     font="Ubuntu Bold",
-    fontsize=11,
+    fontsize=13,
     padding=2,
     background=colors[23]
-)
+    )
 extension_defaults = widget_defaults.copy()
+
+##Mouse Callbacks##
 
 screens = [
     Screen(
@@ -206,10 +246,10 @@ screens = [
                            padding = 6,
                            ),
                 widget.Image(
-                             filename = "~/.config/qtile/icons/python.png",
+                             filename = "~/.config/qtile/icons/arch.png",
+                             mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(mymenu)},
                              scale = "False"
-                             #mouse_callbacks = {"Button1": lambda: qtile.cmd_spawn(terminal)}
-                             ),
+                            ),
                 widget.Sep(
                            linewidth = 0,
                            padding = 6,
@@ -222,8 +262,10 @@ screens = [
                                 padding_y = 5,
                                 padding_x = 2
                                 ),
-                widget.CurrentLayoutIcon(),
-                widget.CurrentLayout(),
+                widget.Sep(
+                           linewidth = 2,
+                           padding = 12,
+                           ),                 
                 widget.Prompt(),
                 widget.WindowName(),
                 widget.Chord(
@@ -232,56 +274,67 @@ screens = [
                     },
                     name_transform=lambda name: name.upper(),
                              ),
-                widget.CPU(
-                           background = colors[4],
-						   foreground = colors[25]
-                           ),
-                widget.Sep(
-                           linewidth = 0,
-                           padding = 6
-                           ),           
-                widget.TextBox(
-                               "Mem:",
-                               background = colors[13],
-						       foreground = colors[25]
-                               ),             
-                widget.Memory(
-                              measure_mem='M',
-                              background = colors[13],
-						      foreground = colors[25]
-                              ),
-                widget.Sep(
-                           linewidth = 0,
-                           padding = 6
-                           ),                           
-                widget.Net(
-						   interface = "enp1s0",	
-						   prefix = "M",
-						   background = colors[8],
-						   foreground = colors[25]
-						   ),
-                widget.Sep(
-                           linewidth = 0,
-                           padding = 6
-                           ),   
-                widget.Clock(
-                             format="%m-%d-%Y %H:%M",
-                             background = colors[1],
-						     foreground = colors[25]
-                             ),
-                widget.Sep(
-                           linewidth = 0,
-                           padding = 6
-                           ),   
-                widget.QuickExit(
-                                 background = colors[10],
-						         foreground = colors[25]
-						         ),
-				widget.Systray(),		         
+              
+				widget.CurrentLayout(),
+				widget.CurrentLayoutIcon(),
 				widget.Sep(
                            linewidth = 0,
-                           padding = 6
-                           ),   		         
+                           padding = 6,
+                           ), 
+                widget.Systray(),                           
+                widget.CheckUpdates(
+                       update_interval = 1800,
+                       distro = "Arch_checkupdates",
+                       display_format = "Updates: {updates} ",
+                       foreground = colors[25],
+                       colour_have_updates = colors[25],
+                       colour_no_updates = colors[25],
+                       mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e sudo pacman -Syu')},
+                       padding = 5,
+                       background = colors[12]
+                       ),
+
+                widget.CPU(
+                           background = colors[9],
+						   foreground = colors[25],
+						   mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e gtop')},
+						   padding = 5
+                           ),
+                widget.TextBox(
+                               text = 'MEM:',
+                               background = colors[12],
+						       foreground = colors[25],
+						       padding = 3
+                               ),
+                widget.Memory(
+                              measure_mem='G',
+                              background = colors[12],
+						      foreground = colors[25],
+						      padding = 4
+                              ),
+                                       
+                widget.Net(
+						   interface = "enp0s31f6",	
+						   prefix = "M",
+						   background = colors[9],
+						   foreground = colors[25],
+						   padding = 5
+						   ),
+                      
+                widget.Clock(
+                             format="%m-%d-%Y %H:%M",
+                             background = colors[12],
+						     foreground = colors[25],
+						     padding = 5,
+                             ),
+                 
+                widget.QuickExit(
+                                 background = colors[9],
+						         foreground = colors[25],
+						         padding = 5,
+						         ),
+
+				  		         
             ],
             24,
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
@@ -302,18 +355,19 @@ dgroups_app_rules = []  # type: list
 follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
-floating_layout = layout.Floating(
-    float_rules=[
-        # Run the utility of `xprop` to see the wm class and name of an X client.
-        *layout.Floating.default_float_rules,
-        Match(wm_class="confirmreset"),  # gitk
-        Match(wm_class="makebranch"),  # gitk
-        Match(wm_class="maketag"),  # gitk
-        Match(wm_class="ssh-askpass"),  # ssh-askpass
-        Match(title="branchdialog"),  # gitk
-        Match(title="pinentry"),  # GPG key password entry
-    ]
-)
+
+
+floating_layout = layout.Floating(float_rules=[
+    # Run the utility of `xprop` to see the wm class and name of an X client.
+    # default_float_rules include: utility, notification, toolbar, splash, dialog,
+    # file_progress, confirm, download and error.
+    *layout.Floating.default_float_rules,
+    Match(title='Confirmation'),      # tastyworks exit box
+    Match(title='Yubico Authenticator'), # Yubioath Desktop
+    Match(wm_class='Galculator')       # Galculator
+])
+
+
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 reconfigure_screens = True

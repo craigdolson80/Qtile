@@ -6,4 +6,5 @@ picom --experimental-backend &
 nm-applet &
 #lxsession &
 nitrogen --restore &
+volumeicon &
 

@@ -24,20 +24,34 @@ def start_once():
 
 #CUSTOM COLORS - Catpuccin / Cappucino#
 def init_colors():
-	return [["#282a36", "#282a36"], #color 0 Background
-			["#44475a", "#44475a"], #color 1 Current Line
-			["#44475a", "#44475a"], #color 2 Selection
-			["#f8f8f2", "#f8f8f2"], #color 3 Foreground
-			["#6272a4", "#6272a4"], #color 4 Comment
-			["#8be9fd", "#8be9fd"], #color 5 Cyan
-			["#50fa7b", "#50fa7b"], #color 6 Green
-			["#ffb86c", "#ffb86c"], #color 7 Orange
-			["#ff79c6", "#ff79c6"], #color 8 Pink
-			["#bd93f9", "#bd93f9"],   #color 9 Purple
-			["#ff5555", "#ff5555"], #color 10 Red
-			["#f1fa8c", "#f1fa8c"], #color 11 Yellow
-			["#FFFFFF", "#FFFFFF"], #color 12 White
-			]
+	return [["#f4dbd6", "#f4dbd6"], #color 0 Rosewater
+			["#f0c6c6", "#f0c6c6"], #color 1 Flamingo
+			["#f5bde6", "#f5bde6"], #color 2 Pink
+			["#c6a0f6", "#c6a0f6"], #color 3 Mauve
+			["#ed8796", "#ed8796"], #color 4 Red
+			["#ee99a0", "#ee99a0"], #color 5 Maroon
+			["#f5a97f", "#f5a97f"], #color 6 Peach
+			["#eed49f", "#eed49f"], #color 7 Yellow
+			["#a6da95", "#a6da95"], #color 8 Green
+			["#8bd5ca", "#8bd5ca"], #color 9 Teal
+			["#91d7e3", "#91d7e3"], #color 10 Sky
+			["#7dc4e4", "#7dc4e4"], #color 11 Sapphire
+			["#8aadf4", "#8aadf4"], #color 12 Blue
+			["#b7bdf8", "#b7bdf8"], #color 13 Lavender
+			["#cad3f5", "#cad3f5"], #color 14 Text
+			["#b8c0e0", "#b8c0e0"], #color 15 Subtext1
+			["#a5adcb", "#a5adcb"], #color 16 Subtext0
+			["#939ab7", "#939ab7"], #color 17 Overlay2
+			["#8087a2", "#8087a2"], #color 18 Overlay1
+			["#6e738d", "#6e738d"], #color 19 Overlay0
+			["#5b6078", "#5b6078"], #color 20 Surface2
+			["#494d64", "#494d64"], #color 21 Surface1
+			["#363a4f", "#363a4f"], #color 22 Surface0
+			["#24273a", "#24273a"], #color 23 Base
+			["#1e2030", "#1e2030"], #color 24 Mantle
+			["#181926", "#181926"], #color 25 Crust
+			["#FFFFFF", "#FFFFFF"], #color 26 White
+            ]
 
 colors = init_colors()			
 
@@ -134,7 +148,7 @@ groups = [
 
     Group("7", label="chat",
         matches=[
-            Match(wm_class=["irssi", "Microsoft Teams - Preview"]),
+            Match(wm_class=["irssi"]),
         ]
           ),
 
@@ -176,29 +190,29 @@ for i in groups:
 
 layouts = [
      layout.MonadTall(
-                     border_focus = colors[12],
-                     border_normal = colors[0],
+                     border_focus = colors[9],
+                     border_normal = colors[19],
                      border_width = 2,
                      margin = 6
                      ),
      layout.Columns(
-                    border_focus = colors[12],
-                    border_normal = colors[0],
+                    border_focus = colors[9],
+                    border_normal = colors[19],
                     border_width = 2,
                     margin = 6
                     ),
      layout.Max(),
     # Try more layouts by unleashing below layouts.
      layout.Stack(
-                  border_focus = colors[12],
-                  border_normal = colors[0],
+                  border_focus = colors[9],
+                  border_normal = colors[19],
                   border_width = 2,
                   margin = 6,
                   num_stacks=2
                   ),
 	 layout.Bsp(
-	            border_focus = colors[12],
-                border_normal = colors[0],
+	            border_focus = colors[9],
+                border_normal = colors[19],
                 border_width = 2,
                 margin = 6
 	            ),
@@ -215,10 +229,9 @@ layouts = [
 
 widget_defaults = dict(
     font="Ubuntu Bold",
-    fontsize=16,
+    fontsize=13,
     padding=2,
-    background=colors[0],
-    foregroun=colors[12]
+    background=colors[23]
     )
 extension_defaults = widget_defaults.copy()
 
@@ -233,7 +246,7 @@ screens = [
                            padding = 6,
                            ),
                 widget.Image(
-                             filename = "~/.config/qtile/icons/python.png",
+                             filename = "~/.config/qtile/icons/green_python.png",
                              mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(mymenu)},
                              scale = "False"
                             ),
@@ -242,22 +255,18 @@ screens = [
                            padding = 6,
                            ),                             
                 widget.GroupBox(
-                                #highlight_color = colors[6],
-                                #highlight_method = "line",
-                                active = colors[8],
-                                inactive = colors[12],
+                                highlight_color = colors[3],
+                                highlight_method = "line",
                                 margin_y = 4,
                                 margin_x = 0,
                                 padding_y = 5,
                                 padding_x = 2
                                 ),
-                               
                 widget.Sep(
                            linewidth = 2,
-                           padding = 18,
-                           ),
+                           padding = 12,
+                           ),                 
                 widget.WindowName(),
-                
                 widget.Chord(
                     chords_colors={
                         "launch": ("#ff0000", "#ffffff"),
@@ -271,121 +280,77 @@ screens = [
                            linewidth = 0,
                            padding = 6,
                            ), 
-                widget.Systray(),
-                widget.Image(
-                            filename = "~/.config/qtile/colors/dracula/end_circle.png",
-                            scale = "False"
-                           ), 
-                 widget.TextBox(
-                               text = '',
-                               background = colors[8],
-						       foreground = colors[12],
-						       fontsize = 14,
-						       padding = 3
-                               ),                                      
+                widget.Systray(),                           
                 widget.CheckUpdates(
                        update_interval = 1800,
                        distro = "Arch_checkupdates",
                        display_format = "Updates: {updates} ",
-                       foreground = colors[12],
-                       colour_have_updates = colors[12],
-                       colour_no_updates = colors[12],
+                       foreground = colors[25],
+                       colour_have_updates = colors[25],
+                       colour_no_updates = colors[25],
                        mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e sudo pacman -Syu')},
                        padding = 5,
-                       background = colors[8]
+                       background = colors[0]
                        ),
                 widget.Image(
-                             filename = "~/.config/qtile/colors/dracula/leading_pink.png",
+                             filename = "~/.config/qtile/colors/theme_icons_catpuccin_macchiato/green_aarow.png",
                              scale = "False"
                             ),
-                widget.TextBox(
-                              text = '',
-                              background = colors[9],
-						       foreground = colors[12],
-						       fontsize = 14,
-						       padding = 3
-                               ),            
                 widget.CPU(
-                           background = colors[9],
-						   foreground = colors[12],
+                           background = colors[8],
+						   foreground = colors[25],
 						   mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e gtop')},
-						   padding = 4
+						   padding = 5
                            ),
                 widget.Image(
-                             filename = "~/.config/qtile/colors/dracula/leading_purple.png",
+                             filename = "~/.config/qtile/colors/theme_icons_catpuccin_macchiato/leading_green_aarow.png",
                              scale = "False"
                             ),
-                
                 widget.TextBox(
-                               text = '',
-                               background = colors[8],
-						       foreground = colors[12],
-						       fontsize = 14,
+                               text = 'MEM:',
+                               background = colors[3],
+						       foreground = colors[25],
 						       padding = 3
                                ),
+               
                 widget.Memory(
                               measure_mem='G',
-                              background = colors[8],
-						      foreground = colors[12],
-						      padding = 4
+                              background = colors[3],
+						      foreground = colors[25],
+						      padding = 5
                               ),
                 widget.Image(
-                             filename = "~/.config/qtile/colors/dracula/leading_pink.png",
+                             filename = "~/.config/qtile/colors/theme_icons_catpuccin_macchiato/leading_mauve_aarow.png",
                              scale = "False"
                             ),                       
-                widget.TextBox(
-                               text = '',
-                               background = colors[9],
-						       foreground = colors[12],
-						       fontsize = 14,
-						       padding = 4
-                               ),
                 widget.Net(
-						   #interface = "enp0s31f6",	
+						   interface = "enp0s31f6",	
 						   prefix = "M",
-						   background = colors[9],
-						   foreground = colors[12],
-						   padding = 4
+						   background = colors[8],
+						   foreground = colors[25],
+						   padding = 5
 						   ),
                 widget.Image(
-                             filename = "~/.config/qtile/colors/dracula/leading_purple.png",
+                             filename = "~/.config/qtile/colors/theme_icons_catpuccin_macchiato/leading_green_aarow.png",
                              scale = "False"
                             ),      
-                widget.TextBox(
-                               text = '',
-                               background = colors[8],
-						       foreground = colors[12],
-						       fontsize = 14,
-						       padding = 4
-                               ),
                 widget.Clock(
                              format="%m-%d-%Y %H:%M",
-                             background = colors[8],
-						     foreground = colors[12],
-						     padding = 4
+                             background = colors[3],
+						     foreground = colors[25],
+						     padding = 5,
                              ),
                 widget.Image(
-                             filename = "~/.config/qtile/colors/dracula/leading_pink.png",
+                             filename = "~/.config/qtile/colors/theme_icons_catpuccin_macchiato/leading_mauve_aarow.png",
                              scale = "False"
                             ),      
-                 widget.TextBox(
-                               text = '',
-                               background = colors[9],
-						       foreground = colors[12],
-						       fontsize = 14,
-						       padding = 4
-                               ),
                 widget.QuickExit(
-                                 background = colors[9],
-						         foreground = colors[12],
-						         padding = 4,
-						         default_text = ()
+                                 background = colors[8],
+						         foreground = colors[25],
+						         padding = 5,
 						         ),
-				widget.Image(
-                             filename = "~/.config/qtile/colors/dracula/purple_left_end.png",
-                             scale = "False"
-                            ),		         
-		       			  		         
+
+				  		         
             ],
             
             24,
