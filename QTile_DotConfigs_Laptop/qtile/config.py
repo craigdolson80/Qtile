@@ -179,13 +179,13 @@ layouts = [
                      border_focus = colors[12],
                      border_normal = colors[0],
                      border_width = 2,
-                     margin = 6
+                     margin = 15
                      ),
      layout.Columns(
                     border_focus = colors[12],
                     border_normal = colors[0],
                     border_width = 2,
-                    margin = 6
+                    margin = 15
                     ),
      layout.Max(),
     # Try more layouts by unleashing below layouts.
@@ -193,14 +193,14 @@ layouts = [
                   border_focus = colors[12],
                   border_normal = colors[0],
                   border_width = 2,
-                  margin = 6,
+                  margin = 15,
                   num_stacks=2
                   ),
 	 layout.Bsp(
 	            border_focus = colors[12],
                 border_normal = colors[0],
                 border_width = 2,
-                margin = 6
+                margin = 15
 	            ),
     # layout.Matrix(),
     # layout.MonadWide(),
@@ -265,7 +265,9 @@ screens = [
                     name_transform=lambda name: name.upper(),
                              ),
               
-				widget.CurrentLayout(),
+				widget.CurrentLayout(
+				           fontsize = 12,          
+				             ),
 				widget.CurrentLayoutIcon(),
 				widget.Sep(
                            linewidth = 0,
