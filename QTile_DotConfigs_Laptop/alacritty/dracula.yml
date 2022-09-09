@@ -59,3 +59,5 @@ colors:
     magenta: '#ff92df'
     cyan: '#a4ffff'
     white: '#ffffff'
+window:
+    opacity: 0.80 #From 0.00 to 1.00
