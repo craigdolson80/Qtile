@@ -273,14 +273,21 @@ screens = [
                            ), 
                 widget.Systray(),
                 widget.Image(
-                             filename = "~/.config/qtile/colors/nord_theme/end_aarow_reversed.png",
-                             scale = "False"
-                            ),                          
+                            filename = "~/.config/qtile/colors/nord_theme/colors/nord_theme/end_aarow_reversed.png",
+                            scale = "False"
+                           ), 
+                 widget.TextBox(
+                               text = '',
+                               background = colors[5],
+						       foreground = colors[12],
+						       fontsize = 14 ,
+						       padding = 3
+                               ),                                      
                 widget.CheckUpdates(
                        update_interval = 1800,
                        distro = "Arch_checkupdates",
                        display_format = "Updates: {updates} ",
-                       foreground = colors[12],
+                       foreground = colors[16],
                        colour_have_updates = colors[12],
                        colour_no_updates = colors[12],
                        mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e sudo pacman -Syu')},
@@ -291,6 +298,13 @@ screens = [
                              filename = "~/.config/qtile/colors/nord_theme/leading_dark_aarow.png",
                              scale = "False"
                             ),
+                widget.TextBox(
+                              text = '',
+                              background = colors[7],
+						       foreground = colors[12],
+						       fontsize = 14,
+						       padding = 3
+                               ),            
                 widget.CPU(
                            background = colors[7],
 						   foreground = colors[12],
@@ -301,13 +315,14 @@ screens = [
                              filename = "~/.config/qtile/colors/nord_theme/leading_light_aarow.png",
                              scale = "False"
                             ),
+                
                 widget.TextBox(
-                               text = 'MEM:',
+                               text = '',
                                background = colors[5],
 						       foreground = colors[12],
+						       fontsize = 14,
 						       padding = 3
                                ),
-               
                 widget.Memory(
                               measure_mem='G',
                               background = colors[5],
@@ -318,8 +333,15 @@ screens = [
                              filename = "~/.config/qtile/colors/nord_theme/leading_dark_aarow.png",
                              scale = "False"
                             ),                       
+                widget.TextBox(
+                               text = '',
+                               background = colors[7],
+						       foreground = colors[12],
+						       fontsize = 14,
+						       padding = 3
+                               ),
                 widget.Net(
-						   interface = "enp0s20u6",	
+						   #interface = "enp0s31f6",	
 						   prefix = "M",
 						   background = colors[7],
 						   foreground = colors[12],
@@ -329,6 +351,13 @@ screens = [
                              filename = "~/.config/qtile/colors/nord_theme/leading_light_aarow.png",
                              scale = "False"
                             ),      
+                widget.TextBox(
+                               text = '',
+                               background = colors[5],
+						       foreground = colors[12],
+						       fontsize = 14,
+						       padding = 3
+                               ),
                 widget.Clock(
                              format="%m-%d-%Y %H:%M",
                              background = colors[5],
@@ -339,6 +368,13 @@ screens = [
                              filename = "~/.config/qtile/colors/nord_theme/leading_dark_aarow.png",
                              scale = "False"
                             ),      
+                 widget.TextBox(
+                               text = '',
+                               background = colors[7],
+						       foreground = colors[12],
+						       fontsize = 14,
+						       padding = 3
+                               ),
                 widget.QuickExit(
                                  background = colors[7],
 						         foreground = colors[12],
