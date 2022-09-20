@@ -37,6 +37,7 @@ def init_colors():
 			["#ff5555", "#ff5555"], #color 10 Red
 			["#f1fa8c", "#f1fa8c"], #color 11 Yellow
 			["#FFFFFF", "#FFFFFF"], #color 12 White
+			["#000000", "#000000"], #color 13 Black
 			]
 
 colors = init_colors()			
@@ -218,7 +219,7 @@ widget_defaults = dict(
     fontsize=14,
     padding=2,
     background=colors[0],
-    foregroun=colors[12]
+    foreground=colors[12]
     )
 extension_defaults = widget_defaults.copy()
 
@@ -233,9 +234,11 @@ screens = [
                            padding = 6,
                            ),
                 widget.Image(
-                             filename = "~/.config/qtile/icons/python.png",
+                             filename = "~/.config/qtile/icons/arch-small.png",
                              mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(mymenu)},
-                             scale = "False"
+                             scale = "False",
+                             margin_x = 3,
+                             margin_y = 3
                             ),
                 widget.Sep(
                            linewidth = 0,
@@ -382,10 +385,10 @@ screens = [
 						         foreground = colors[12],
 						         padding = 6,
 						         ),
-				widget.Image(
-                             filename = "~/.config/qtile/colors/dracula/purple_left_end.png",
-                             scale = "False"
-                            ),		         
+				#widget.Image(
+                #            filename = "~/.config/qtile/colors/dracula/purple_left_end.png",
+                #             scale = "False"
+                #            ),		         
 		       			  		         
             ],
             
