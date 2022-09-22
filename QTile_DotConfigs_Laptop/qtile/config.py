@@ -233,10 +233,21 @@ screens = [
                            padding = 6,
                            ),
                 widget.Image(
-                             filename = "~/.config/qtile/icons/python.png",
+                            filename = "~/.config/qtile/colors/dracula/green_left.png",
+                            scale = "False"
+                           ),           
+                widget.Image(
+                             filename = "~/.config/qtile/icons/arch_linux_icon1.png",
                              mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(mymenu)},
-                             scale = "False"
+                             scale = "False",
+                             margin_x = 3,
+                             background = colors[6],
+                             margin_y = 3
                             ),
+                widget.Image(
+                            filename = "~/.config/qtile/colors/dracula/green_right.png",
+                            scale = "False"
+                           ),             
                 widget.Sep(
                            linewidth = 0,
                            padding = 6,
@@ -244,7 +255,7 @@ screens = [
                 widget.GroupBox(
                                 #highlight_color = colors[6],
                                 #highlight_method = "line",
-                                active = colors[8],
+                                active = colors[6],
                                 inactive = colors[12],
                                 margin_y = 4,
                                 margin_x = 0,
@@ -381,12 +392,11 @@ screens = [
                                  background = colors[9],
 						         foreground = colors[12],
 						         padding = 6,
-						         default_text = ()
 						         ),
-				widget.Image(
-                             filename = "~/.config/qtile/colors/dracula/purple_left_end.png",
-                             scale = "False"
-                            ),		         
+				#widget.Image(
+                #             filename = "~/.config/qtile/colors/dracula/purple_left_end.png",
+                #             scale = "False"
+                #            ),		         
 		       			  		         
             ],
             
