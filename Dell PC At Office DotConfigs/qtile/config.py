@@ -82,6 +82,12 @@ keys = [
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "space", lazy.spawn(mymenu), desc="Run Rofi"),
        
+   #Custom Key Combinations
+    Key([mod], "b", lazy.spawn("firefox"), desc="Launch Firefox"),
+    Key([mod], "g", lazy.spawn("geany"), desc="Launch Geany"),
+    Key([mod], "f", lazy.spawn("pcmanfm"), desc="Launch PCManFM"),
+    
+   
    #Custom DMENU Launcher
    Key([mod, "control"], "Return", lazy.run_extension(extension.DmenuRun(
         dmenu_prompt="$",
@@ -180,13 +186,13 @@ layouts = [
                      border_focus = colors[9],
                      border_normal = colors[0],
                      border_width = 3,
-                     margin = 10
+                     margin = 15
                      ),
      layout.Columns(
                     border_focus = colors[9],
                     border_normal = colors[0],
                     border_width = 3,
-                    margin = 10
+                    margin = 15
                     ),
      layout.Max(),
     # Try more layouts by unleashing below layouts.
@@ -194,14 +200,14 @@ layouts = [
                   border_focus = colors[9],
                   border_normal = colors[0],
                   border_width = 3,
-                  margin = 10,
+                  margin = 15,
                   num_stacks=2
                   ),
 	 layout.Bsp(
 	            border_focus = colors[9],
                 border_normal = colors[0],
                 border_width = 3,
-                margin = 10
+                margin = 15
 	            ),
     # layout.Matrix(),
     # layout.MonadWide(),
@@ -215,11 +221,11 @@ layouts = [
 ## Widget defaults ##
 
 widget_defaults = dict(
-    font="Liberation Sans Bold",
+    font="Ubuntu Bold",
     fontsize=14,
     padding=2,
     background=colors[0],
-    foreground=colors[12]
+    foregroun=colors[12]
     )
 extension_defaults = widget_defaults.copy()
 
@@ -234,12 +240,21 @@ screens = [
                            padding = 6,
                            ),
                 widget.Image(
-                             filename = "~/.config/qtile/icons/arch-small.png",
+                            filename = "~/.config/qtile/colors/dracula/green_left.png",
+                            scale = "False"
+                           ),           
+                widget.Image(
+                             filename = "~/.config/qtile/icons/arch_linux_icon1.png",
                              mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(mymenu)},
                              scale = "False",
                              margin_x = 3,
+                             background = colors[6],
                              margin_y = 3
                             ),
+                widget.Image(
+                            filename = "~/.config/qtile/colors/dracula/green_right.png",
+                            scale = "False"
+                           ),             
                 widget.Sep(
                            linewidth = 0,
                            padding = 6,
@@ -247,7 +262,7 @@ screens = [
                 widget.GroupBox(
                                 #highlight_color = colors[6],
                                 #highlight_method = "line",
-                                active = colors[8],
+                                active = colors[6],
                                 inactive = colors[12],
                                 margin_y = 4,
                                 margin_x = 0,
@@ -386,7 +401,7 @@ screens = [
 						         padding = 6,
 						         ),
 				#widget.Image(
-                #            filename = "~/.config/qtile/colors/dracula/purple_left_end.png",
+                #             filename = "~/.config/qtile/colors/dracula/purple_left_end.png",
                 #             scale = "False"
                 #            ),		         
 		       			  		         
