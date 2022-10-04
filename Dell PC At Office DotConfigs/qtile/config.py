@@ -186,13 +186,13 @@ layouts = [
                      border_focus = colors[9],
                      border_normal = colors[0],
                      border_width = 3,
-                     margin = 15
+                     margin = 10
                      ),
      layout.Columns(
                     border_focus = colors[9],
                     border_normal = colors[0],
                     border_width = 3,
-                    margin = 15
+                    margin = 10
                     ),
      layout.Max(),
     # Try more layouts by unleashing below layouts.
@@ -200,14 +200,14 @@ layouts = [
                   border_focus = colors[9],
                   border_normal = colors[0],
                   border_width = 3,
-                  margin = 15,
+                  margin = 10,
                   num_stacks=2
                   ),
 	 layout.Bsp(
 	            border_focus = colors[9],
                 border_normal = colors[0],
                 border_width = 3,
-                margin = 15
+                margin = 10
 	            ),
     # layout.Matrix(),
     # layout.MonadWide(),
@@ -240,7 +240,7 @@ screens = [
                            padding = 6,
                            ),
                 widget.Image(
-                            filename = "~/.config/qtile/colors/dracula/green_left.png",
+                            filename = "~/.config/qtile/colors/dracula/smaller_green_left.png",
                             scale = "False"
                            ),           
                 widget.Image(
@@ -252,13 +252,13 @@ screens = [
                              margin_y = 3
                             ),
                 widget.Image(
-                            filename = "~/.config/qtile/colors/dracula/green_right.png",
+                            filename = "~/.config/qtile/colors/dracula/smaller_green_right.png",
                             scale = "False"
-                           ),             
+                           ),       
                 widget.Sep(
                            linewidth = 0,
-                           padding = 6,
-                           ),                             
+                           padding = 6
+                           ),                            
                 widget.GroupBox(
                                 #highlight_color = colors[6],
                                 #highlight_method = "line",
@@ -393,13 +393,25 @@ screens = [
                                background = colors[9],
 						       foreground = colors[12],
 						       fontsize = 14,
-						       padding = 3
+						       padding = 3,
+						       mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn('systemctl poweroff')}
                                ),
-                widget.QuickExit(
-                                 background = colors[9],
-						         foreground = colors[12],
-						         padding = 6,
-						         ),
+                widget.TextBox(
+                               text = '',
+                               background = colors[9],
+						       foreground = colors[12],
+						       fontsize = 14,
+						       padding = 6,
+						       mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn('systemctl restart')}
+                               ),               
+                widget.TextBox(
+                               text = '',
+                               background = colors[9],
+						       foreground = colors[12],
+						       fontsize = 14,
+						       padding = 6,
+						       mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e killall qtile')},
+                               ),
 				#widget.Image(
                 #             filename = "~/.config/qtile/colors/dracula/purple_left_end.png",
                 #             scale = "False"
